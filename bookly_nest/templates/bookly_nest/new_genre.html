@@ -1,0 +1,11 @@
+{% extends "bookly_nest/base.html" %}
+
+{% block content %} 
+    <p>Add a new genre</p>
+    <form method="post" action="{% url 'bookly_nest:new_genre' %}">
+        {% csrf_token %}
+        {{form.as_div}}
+        <button name="submit">Add genre</button>
+    </form>
+    
+{% endblock %}

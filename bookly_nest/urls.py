@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('genres/', views.genres, name="genres"),
     path('genres/<int:genre_id>', views.genre, name="genre"),
+    path('new_genre/', views.new_genre, name="new_genre"),
 ]
