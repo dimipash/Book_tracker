@@ -1,0 +1,13 @@
+{% extends "bookly_nest/base.html" %}
+{% block content %} 
+    <p> Genres </p>
+    <ul>
+        {% for genre in genres  %}
+            <li> 
+                <a href="{% url "bookly_nest:genre" genre.id %}">{{genre.name}} </a>                
+            </li>
+            {% empty %}
+                <p>No genres</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

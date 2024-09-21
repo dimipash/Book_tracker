@@ -1,0 +1,14 @@
+{% extends "bookly_nest/base.html" %}
+
+{% block content %} 
+    <p>{{genre.name}}</p>
+    <ul>
+        {% for book in books  %}  
+            <li>{{book.title}}</li>
+                <p>{{book.date_added | date:'d M Y, H:i'}}</p>
+                <p>{{book.description | linebreaks }}</p>
+            {%empty%}
+                <p>No books found</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
