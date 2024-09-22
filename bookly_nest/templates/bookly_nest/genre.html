@@ -5,9 +5,12 @@
     <a href="{% url "bookly_nest:new_book" genre.id %}">Add a new book</a>
     <ul>
         {% for book in books  %}  
-            <li>{{book.title}}</li>
+            <li>
                 <p>{{book.date_added | date:'d M Y, H:i'}}</p>
+                {{book.title}}                
                 <p>{{book.description | linebreaks }}</p>
+                <a href="{% url "bookly_nest:edit_book" book.id %}">Edit Book</a>
+            </li>
             {%empty%}
                 <p>No books found</p>
         {% endfor %}
