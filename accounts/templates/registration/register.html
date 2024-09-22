@@ -1,0 +1,15 @@
+{% extends "bookly_nest/base.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <h1>Register</h1>
+    <form method="post" action="{% url "accounts:register" %}">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">Register</button>
+    </form>
+
+{% endblock %}
