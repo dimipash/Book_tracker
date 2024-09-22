@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Book, Genre
-from .forms import GenreForm
+from .forms import GenreForm, BookForm
 from django.shortcuts import redirect
 
 def index(request):
@@ -41,3 +41,22 @@ def new_genre(request):
     }
     
     return render(request, "bookly_nest/new_genre.html", context=context)
+
+def new_book(request, genre_id):
+    genre = Genre.objects.get(pk=genre_id)
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.genre = genre
+            book.save()
+            return redirect('bookly_nest:genre', genre_id=genre_id)
+    else:
+        form = BookForm()
+
+    context = {
+        "form": form,
+        "genre": genre,
+    }
+    
+    return render(request, "bookly_nest/new_book.html", context=context)

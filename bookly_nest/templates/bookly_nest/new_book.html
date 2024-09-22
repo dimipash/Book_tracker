@@ -1,0 +1,12 @@
+{% extends "bookly_nest/base.html" %}
+{% block content %}
+
+<a href="{% url "bookly_nest:genre" genre.id %}">{{ genre }}</a>
+    <h1>Add A New Book</h1>
+    <form method="post" action="{% url "bookly_nest:new_book" genre.id %}">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">Add Book</button>
+    </form>
+
+{% endblock %}

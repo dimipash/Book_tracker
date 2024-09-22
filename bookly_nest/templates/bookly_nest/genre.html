@@ -1,7 +1,8 @@
 {% extends "bookly_nest/base.html" %}
 
 {% block content %} 
-    <p>{{genre.name}}</p>
+    <p>Genre: {{genre.name}}</p>
+    <a href="{% url "bookly_nest:new_book" genre.id %}">Add a new book</a>
     <ul>
         {% for book in books  %}  
             <li>{{book.title}}</li>
