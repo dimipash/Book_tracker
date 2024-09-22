@@ -25,7 +25,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # My apps
     "bookly_nest",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -110,3 +112,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# My settings
+
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "bookly_nest:index"
