@@ -100,3 +100,20 @@ def edit_book(request, book_id):
     }
 
     return render(request, "bookly_nest/edit_book.html", context=context)
+
+
+def delete_book(request, book_id):
+    book = Book.objects.get(pk=book_id)
+    genre = book.genre
+    if genre.owner != request.user:
+        raise Http404
+
+    if request.method == "POST":
+        book.delete()
+        return redirect("bookly_nest:genre", genre_id=genre.id)
+
+    context = {
+        "book": book,
+        "genre": genre,
+    }
+    return render(request, "bookly_nest/delete_book.html", context=context)

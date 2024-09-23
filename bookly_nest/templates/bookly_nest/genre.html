@@ -10,6 +10,7 @@
                 {{book.title}}                
                 <p>{{book.description | linebreaks }}</p>
                 <a href="{% url "bookly_nest:edit_book" book.id %}">Edit Book</a>
+                <a href="{% url "bookly_nest:delete_book" book.id %}">Delete Book</a>
             </li>
             {%empty%}
                 <p>No books found</p>
