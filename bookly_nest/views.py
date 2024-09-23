@@ -3,6 +3,7 @@ from .models import Book, Genre
 from .forms import GenreForm, BookForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 
 def index(request):
@@ -15,7 +16,7 @@ def index(request):
 
 @login_required
 def genres(request):
-    genres = Genre.objects.all()
+    genres = Genre.objects.filter(owner=request.user)
     context = {
         "genres": genres,
     }
@@ -25,6 +26,8 @@ def genres(request):
 @login_required
 def genre(request, genre_id):
     genre = Genre.objects.get(pk=genre_id)
+    if genre.owner != request.user:
+        raise Http404
     books = genre.book_set.order_by("-date_added")
     context = {
         "genre": genre,
@@ -39,6 +42,7 @@ def new_genre(request):
         form = GenreForm(request.POST)
         if form.is_valid():
             genre = form.save(commit=False)
+            genre.owner = request.user
             genre.save()
             return redirect("bookly_nest:genres")
     else:
@@ -76,6 +80,8 @@ def new_book(request, genre_id):
 def edit_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     genre = book.genre
+    if genre.owner != request.user:
+        raise Http404
 
     if request.method == "POST":
         form = BookForm(request.POST, instance=book)
