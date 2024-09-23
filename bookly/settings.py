@@ -115,5 +115,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # My settings
 
+LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "bookly_nest:index"
 LOGOUT_REDIRECT_URL = "bookly_nest:index"

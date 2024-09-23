@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Book, Genre
 from .forms import GenreForm, BookForm
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -12,6 +13,7 @@ def index(request):
     return render(request, "bookly_nest/index.html", context=context)
 
 
+@login_required
 def genres(request):
     genres = Genre.objects.all()
     context = {
@@ -20,6 +22,7 @@ def genres(request):
     return render(request, "bookly_nest/genres.html", context=context)
 
 
+@login_required
 def genre(request, genre_id):
     genre = Genre.objects.get(pk=genre_id)
     books = genre.book_set.order_by("-date_added")
@@ -30,6 +33,7 @@ def genre(request, genre_id):
     return render(request, "bookly_nest/genre.html", context=context)
 
 
+@login_required
 def new_genre(request):
     if request.method == "POST":
         form = GenreForm(request.POST)
@@ -47,6 +51,7 @@ def new_genre(request):
     return render(request, "bookly_nest/new_genre.html", context=context)
 
 
+@login_required
 def new_book(request, genre_id):
     genre = Genre.objects.get(pk=genre_id)
     if request.method == "POST":
@@ -67,6 +72,7 @@ def new_book(request, genre_id):
     return render(request, "bookly_nest/new_book.html", context=context)
 
 
+@login_required
 def edit_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     genre = book.genre
