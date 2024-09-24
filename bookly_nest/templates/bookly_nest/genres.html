@@ -4,11 +4,11 @@
     <ul>
         {% for genre in genres  %}
             <li> 
-                <a href="{% url "bookly_nest:genre" genre.id %}">{{genre.name}} </a>                
+                <a href="{% url "bookly_nest:genre" genre.id %}"><strong>{{ genre.name }}</strong></a>
             </li>
             {% empty %}
                 <p>No genres</p>
         {% endfor %}
     </ul>
-    <a href="{% url 'bookly_nest:new_genre' %}">Add a new genre</a>
+    <a href="{% url 'bookly_nest:new_genre' %}"><strong>Add a new genre</strong></a>
 {% endblock %}
