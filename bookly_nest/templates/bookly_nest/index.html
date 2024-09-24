@@ -1,4 +1,11 @@
 {%extends "bookly_nest/base.html" %}
+
 {% block content %} 
-    <p> Add your books and keep track of your reading progress 😊</p>
+    <div class="container">
+        <div class="col-md-12">
+            <h1 class="display-2">Bookly Nest</h1>
+            <p class="lead">Welcome to Bookly Nest - your personal reading companion! This Django-powered web app allows you to organize your reading list and track your progress with ease. Whether you're a casual reader or a book enthusiast, Bookly Nest helps you manage your collection by adding books, categorizing them into genres, and keeping up with your reading goals.</p>
+        </div>
+        <a href="{% url 'accounts:register' %}" class="btn btn-outline-secondary btn-sm">Register >></a>
+    </div>
 {% endblock %}

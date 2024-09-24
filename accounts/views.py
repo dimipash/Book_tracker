@@ -4,6 +4,9 @@ from django.contrib.auth import login
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect("bookly_nest:index")
+
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
