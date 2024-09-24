@@ -1,14 +1,32 @@
 {% extends "bookly_nest/base.html" %}
-{% block content %} 
-    <p> Genres </p>
-    <ul>
-        {% for genre in genres  %}
-            <li> 
-                <a href="{% url "bookly_nest:genre" genre.id %}"><strong>{{ genre.name }}</strong></a>
-            </li>
-            {% empty %}
-                <p>No genres</p>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'bookly_nest:new_genre' %}"><strong>Add a new genre</strong></a>
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Genres</h2>
+        <a href="{% url 'bookly_nest:new_genre' %}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-plus"></i> Add new genre
+        </a>
+    </div>
+
+    {% if genres %}
+        <div class="list-group">
+            {% for genre in genres %}
+                <a href="{% url 'bookly_nest:genre' genre.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span>{{ genre.name }}</span>
+                    <span class="badge bg-primary rounded-pill">
+                        <i class="bi bi-book"></i>                        
+                        {{ genre.book_set.count }}
+                    </span>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            <i class="bi bi-info-circle me-2"></i>No genres available. Add a new genre to get started!
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
+

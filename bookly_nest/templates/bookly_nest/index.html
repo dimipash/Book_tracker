@@ -6,6 +6,12 @@
             <h1 class="display-2">Bookly Nest</h1>
             <p class="lead">Welcome to Bookly Nest - your personal reading companion! This Django-powered web app allows you to organize your reading list and track your progress with ease. Whether you're a casual reader or a book enthusiast, Bookly Nest helps you manage your collection by adding books, categorizing them into genres, and keeping up with your reading goals.</p>
         </div>
-        <a href="{% url 'accounts:register' %}" class="btn btn-outline-secondary btn-sm">Register >></a>
+        {% if not user.is_authenticated %}
+            <div class="col-md-12 mt-4">
+                <a href="{% url 'accounts:register' %}" class="btn btn-outline-secondary btn-sm">Register >></a>
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline-secondary btn-sm">Login >></a>                
+            </div>
+        {% endif %}
+        
     </div>
 {% endblock %}

@@ -1,12 +1,36 @@
 {% extends "bookly_nest/base.html" %}
 {% block content %}
-
-<a href="{% url "bookly_nest:genre" genre.id %}">{{ genre }}</a>
-    <h1>Add A New Book</h1>
-    <form method="post" action="{% url "bookly_nest:new_book" genre.id %}">
-        {% csrf_token %}
-        {{ form.as_div }}
-        <button type="submit">Add Book</button>
-    </form>
-
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h1 class="h3 mb-4 fw-normal text-center">Add A New Book</h1>
+                    
+                    <form method="post" action="{% url 'bookly_nest:new_book' genre.id %}">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="mb-3 row">
+                            <label for="{{ field.id_for_label }}" class="col-sm-3 col-form-label">{{ field.label }}</label>
+                            <div class="col-sm-9">
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="row">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button class="btn btn-outline-secondary" type="submit">Add Book</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mt-3 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <a href="{% url 'bookly_nest:genre' genre.id %}" class="text-decoration-none">Back to {{ genre }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
